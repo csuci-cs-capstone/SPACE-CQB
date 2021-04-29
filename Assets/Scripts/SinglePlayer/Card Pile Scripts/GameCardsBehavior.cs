@@ -89,6 +89,45 @@ public class GameCardsBehavior : MonoBehaviour
             case "Kushan_Repair_Corvette":
                 card = Kushan_Repair_Corvette;
                 break;
+            case "Taiidan_Assault_Frigate":
+                card = Taiidan_Assault_Frigate;
+                break;
+            case "Taiidan_Attack_Bomber":
+                card = Taiidan_Attack_Bomber;
+                break;
+            case "Taiidan_Carrier":
+                card = Taiidan_Carrier;
+                break;
+            case "Taiidan_Decoy":
+                card = Taiidan_Decoy;
+                break;
+            case "Taiidan_Destroyer":
+                card = Taiidan_Destroyer;
+                break;
+            case "Taiidan_Heavy_Corvette":
+                card = Taiidan_Heavy_Corvette;
+                break;
+            case "Taiidan_Heavy_Cruiser":
+                card = Taiidan_Heavy_Cruiser;
+                break;
+            case "Taiidan_Interceptor":
+                card = Taiidan_Interceptor;
+                break;
+            case "Taiidan_Ion_Frigate":
+                card = Taiidan_Ion_Frigate;
+                break;
+            case "Taiidan_Light_Corvette":
+                card = Taiidan_Light_Corvette;
+                break;
+            case "Taiidan_Missle_Destroyer":
+                card = Taiidan_Missle_Destroyer;
+                break;
+            case "Taiidan_Multigun_Corvette":
+                card = Taiidan_Multigun_Corvette;
+                break;
+            case "Taiidan_Scout_Fighter":
+                card = Taiidan_Scout_Fighter;
+                break;
             default:
                 card = null;
                 break;
@@ -98,7 +137,7 @@ public class GameCardsBehavior : MonoBehaviour
 
     public GameObject CreateCard(string card_name)
     {
-        //Debug.Log("Trying to instantiate a " + card_name);
+        Debug.Log("Trying to instantiate a " + card_name);
         GameObject card = GetOriginalCard(card_name);
         card = Instantiate(card,null);
         return card;

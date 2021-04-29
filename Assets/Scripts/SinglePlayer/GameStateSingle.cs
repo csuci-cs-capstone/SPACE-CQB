@@ -8,6 +8,7 @@ public class GameStateSingle : MonoBehaviour
     public BattleState state;
     public SP_CardPile Hand;
     public PassingButton button;
+    public PassingNotice PassingNotice;
 
     public void SetBattleState(int index)
     {
@@ -28,32 +29,12 @@ public class GameStateSingle : MonoBehaviour
     {
         this.state = BattleState.PLAYERPASSING;
         button.Disable();
+        PassingNotice.Enable();
     }
-    /*
-    public void DetermineNewState()
-    {
-        if (!(state == BattleState.PLAYERPASSING))
-        {
-            if (state == BattleState.PLAYERTURN)
-            {
-                if (Hand.GetNumberOfCards() == 0)
-                {
-                    SetBattleState(5);
-                }
-                else if (Hand.GetNumberOfCards() > 0)
-                {
-                    SetBattleState(0);
-                }
-            }
-            else if(state == BattleState.ENEMYTURN)
-            {
-                SetBattleState(1);
-            }
-        }
-    }*/
 
     public void Reset_Button()
     {
         button.Reset();
+        PassingNotice.Disable();
     }
 }

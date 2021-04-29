@@ -91,4 +91,29 @@ public class SP_CardPile : MonoBehaviour
             card.GetComponent<CQBCard>().ActivateBase();
         }
     }
+
+    public bool CardIsInPile(GameObject card)
+    {
+        if (card.transform.parent.gameObject.GetComponent<SP_CardPile>().GetCardPileType() == CardPileType.HAND_PILE)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public GameObject AbilityInPile(Modifiers.CardModifiers modifier)
+    {
+        List<GameObject> localcards = GetCardsInCardPile();
+        foreach(GameObject card in localcards)
+        {
+            if(card.GetComponent<CardModifier>().GetModifier() == modifier)
+            {
+                return card;
+            }
+        }
+        return null;
+    }
 }

@@ -15,7 +15,6 @@ public class Login : MonoBehaviour
     public InputField Registration_player_name;
     public InputField Login_player_name;
 
-    // Start is called before the first frame update
     void Start()
     {
         account = GameObject.Find("ActiveAccount").GetComponent<AccountCharacteristics>();

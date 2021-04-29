@@ -22,7 +22,12 @@ public class Modifiers : MonoBehaviour
         BattleBuddiesAssault,
         BattleBuddiesIon,
         Quick_Deploy,
-        Bomber,
-        Anti_Strike
+        Anti_Frigate,
+        Anti_Capital,
+        Anti_Fighter,
+        EMP,
+        DECOY,
+        SPY,
+        CAP
     }
 }

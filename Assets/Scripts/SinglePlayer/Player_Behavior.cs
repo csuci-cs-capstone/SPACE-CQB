@@ -9,14 +9,11 @@ public class Player_Behavior : MonoBehaviour
     [SerializeField] private Type type;
     [SerializeField] private GameObject Hand;
     [SerializeField] private GameObject Playfield;
-    [SerializeField] private GameObject card;
     [SerializeField] private GameObject discard;
     [SerializeField] private GameStateSingle PlayerState;
     [SerializeField] private GameObject PlayerTokens;
     [SerializeField] private GameObject Pass;
     [SerializeField] private SP_Deck Deck;
-    [SerializeField] private int PassChance;
-    [SerializeField] private int roll;
     private int rounds_won;
  
     public void Start()
@@ -25,28 +22,7 @@ public class Player_Behavior : MonoBehaviour
         Playfield.SetActive(false);
         rounds_won = 0;
     }
-    public GameObject make_a_move()
-    {
-        card = null;
-        int seed = (int)(Time.realtimeSinceStartup * 100);
-        Random.InitState(seed);
-        roll = Random.Range(1, 101);
-        if(roll <= PassChance)
-        {
-            PlayerState.SetPassing();
-        }
-        else
-        {
-            List<GameObject> cards = Hand.GetComponent<SP_CardPile>().GetCardsInCardPile();
-            int index = Random.Range(0, cards.Count);
-
-            card = cards[index];
-
-            card.transform.SetParent(Playfield.transform, false);
-            card.GetComponent<CQBCard>().ActivatePlayable();
-        }
-        return card;
-    }
+    
 
     public SP_CardPile GetHand()
     {

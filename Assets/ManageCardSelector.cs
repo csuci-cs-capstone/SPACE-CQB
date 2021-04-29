@@ -8,13 +8,17 @@ public class ManageCardSelector : MonoBehaviour
     [SerializeField] private GameObject ConfirmPopup;
     [SerializeField] private Manage_Card_Collection Collection;
     [SerializeField] private Manage_Card_Collection Deck;
+    [SerializeField] private GameObject NoResponse;
 
 
     [SerializeField] private int clicks;
     private float lastTimer;
     private float currentTimer;
 
-    private RectTransform rectTransform;
+    private void Start()
+    {
+        DeactivateResponse();
+    }
     public GameObject GetClickedCard()
     {
         Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
@@ -56,15 +60,37 @@ public class ManageCardSelector : MonoBehaviour
                     {
                         if (card.transform.IsChildOf(Collection.gameObject.transform))
                         {
+                            if(Deck.gameObject.transform.childCount > 0)
+                            {
+                                GameObject siblingCard = Deck.gameObject.transform.GetChild(0).gameObject;
+                                if (siblingCard == null || card.GetComponent<CQBCard>().GetFaction() != siblingCard.GetComponent<CQBCard>().GetFaction())
+                                {
+                                    ActivateResponse();
+                                    Invoke("DeactivateResponse", 3);
+                                    return;
+                                }
+                            }
                             card.transform.SetParent(Deck.gameObject.transform, false);
                             Deck.Reorganize();
                             Deck.UpdateList();
+                            
                         }
                         else if(card.transform.IsChildOf(Deck.gameObject.transform))
                         {
+                            if(Collection.gameObject.transform.childCount > 0)
+                            {
+
+                                GameObject siblingCard = Collection.gameObject.transform.GetChild(0).gameObject;
+                                if (siblingCard == null || card.GetComponent<CQBCard>().GetFaction() != siblingCard.GetComponent<CQBCard>().GetFaction())
+                                {
+                                    ActivateResponse();
+                                    Invoke("DeactivateResponse", 3);
+                                    return;
+                                }
+                            }
                             card.transform.SetParent(Collection.gameObject.transform, false);
-                            Collection.Reorganize();
-                            Collection.UpdateList();
+                            Deck.Reorganize();
+                            Deck.UpdateList();
                         }
                     }
                 }
@@ -92,5 +118,23 @@ public class ManageCardSelector : MonoBehaviour
     public void SetActiveDeck(Manage_Card_Collection deck)
     {
         this.Deck = deck;
+    }
+
+    public void SetActiveCollection(Manage_Card_Collection collection)
+    {
+        Collection = collection;
+    }
+
+    private void DeactivateResponse()
+    {
+        if (NoResponse.activeSelf)
+        {
+            NoResponse.SetActive(false);
+        }
+    }
+
+    private void ActivateResponse()
+    {
+        NoResponse.SetActive(true);
     }
 }

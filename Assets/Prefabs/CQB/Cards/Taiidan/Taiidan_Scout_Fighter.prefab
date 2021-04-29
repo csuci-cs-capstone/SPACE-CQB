@@ -2682,7 +2682,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 155.37, y: 223.05}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6935620523227465543
 CanvasRenderer:
@@ -2732,6 +2732,10 @@ MonoBehaviour:
   BaseSymbol: {fileID: 0}
   PositiveSymbol: {fileID: 0}
   NegativeSymbol: {fileID: 0}
+  is_enviro_modified: 0
+  is_modified_buddy: 0
+  is_modified_hunter: 0
+  is_debuffed: 0
 --- !u!61 &6935620523227465547
 BoxCollider2D:
   m_ObjectHideFlags: 0

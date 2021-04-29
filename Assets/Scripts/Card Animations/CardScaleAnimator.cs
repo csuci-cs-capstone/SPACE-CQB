@@ -14,7 +14,7 @@ public class CardScaleAnimator : MonoBehaviour
     private float incrementX;
     private float incrementY;
 
-    private bool isAnimating;
+    [SerializeField] private bool isAnimating;
 
     void Start()
     {

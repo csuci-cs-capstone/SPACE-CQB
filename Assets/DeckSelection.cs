@@ -11,6 +11,7 @@ public class DeckSelection : MonoBehaviour
     [SerializeField] private AccountCharacteristics Account;
     [SerializeField] private GameCardsBehavior AllCards;
     [SerializeField] private GameObject TokenField;
+    [SerializeField] private ScrollRect Content;
 
     private void Start()
     {
@@ -30,7 +31,14 @@ public class DeckSelection : MonoBehaviour
                 card.GetComponent<CQBCard>().ActivatePlayable();
                 card.GetComponent<CQBCard>().ActivateBase();
                 Collection.AddCard(card);
-                card.transform.localScale = new Vector3(.6f, .6f);
+                if(card.GetComponent<CQBCard>().GetFaction() == CQBCard.FactionType.TAIIDAN)
+                {
+                    card.transform.localScale = new Vector3(.35f, .35f);
+                }
+                else
+                {
+                    card.transform.localScale = new Vector3(.6f, .6f);
+                }
             }
         }
         Change_Deck(0);
@@ -79,6 +87,7 @@ public class DeckSelection : MonoBehaviour
                 if (!Manage_Deck1.gameObject.activeSelf)
                 {
                     Manage_Deck1.gameObject.SetActive(true);
+                    Content.content = Manage_Deck1.gameObject.GetComponent<RectTransform>();
                 }
                 if (Manage_Deck2.gameObject.activeSelf)
                 {
@@ -97,6 +106,7 @@ public class DeckSelection : MonoBehaviour
                 if (!Manage_Deck2.gameObject.activeSelf)
                 {
                     Manage_Deck2.gameObject.SetActive(true);
+                    Content.content = Manage_Deck2.gameObject.GetComponent<RectTransform>();
                 }
                 if (Manage_Deck3.gameObject.activeSelf)
                 {
@@ -115,12 +125,14 @@ public class DeckSelection : MonoBehaviour
                 if (!Manage_Deck3.gameObject.activeSelf)
                 {
                     Manage_Deck3.gameObject.SetActive(true);
+                    Content.content = Manage_Deck3.gameObject.GetComponent<RectTransform>();
                 }
                 break;
             default:
                 if (!Manage_Deck1.gameObject.activeSelf)
                 {
                     Manage_Deck1.gameObject.SetActive(true);
+                    Content.content = Manage_Deck1.gameObject.GetComponent<RectTransform>();
                 }
                 if (Manage_Deck2.gameObject.activeSelf)
                 {

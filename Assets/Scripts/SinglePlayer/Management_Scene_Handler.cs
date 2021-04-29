@@ -8,48 +8,60 @@ public class Management_Scene_Handler : MonoBehaviour
 {
     [SerializeField] private AccountCharacteristics Account;
     [SerializeField] private Manage_Card_Collection Collection;
-    [SerializeField] private Manage_Card_Collection Manage_Collection;
+    [SerializeField] private ScrollRect CollectionContent;
+    [SerializeField] private ScrollRect DeckContent;
     [SerializeField] private Manage_Card_Collection Manage_Deck1;
     [SerializeField] private Manage_Card_Collection Manage_Deck2;
     [SerializeField] private Manage_Card_Collection Manage_Deck3;
     [SerializeField] private GameCardsBehavior AllCards;
     [SerializeField] private List<string> deck_list;
-    [SerializeField] private Dropdown dropdown;
     [SerializeField] private ManageCardSelector Selector;
     [SerializeField] private StatisticsHandler Stats;
+    [SerializeField] private List<CQBCard.FactionType> factions;
+    [SerializeField] private int ActiveFactionIndex;
+    [SerializeField] private Image FactionSymbol;
+    [SerializeField] private List<Sprite> factionsymbols;
+    [SerializeField] private List<Manage_Card_Collection> factionCollections;
+    [SerializeField] private List<Manage_Card_Collection> decks;
+
 
     private void Start()
     {
         //Create all cards within the collection
 
         Account = GameObject.Find("ActiveAccount").GetComponent<AccountCharacteristics>();
-
-        GameObject card;
         CQBCard.FactionType kushan = CQBCard.FactionType.KUSHAN;
-        //CQBCard.FactionType taiidan = CQBCard.FactionType.TAIIDAN;
+        CQBCard.FactionType taiidan = CQBCard.FactionType.TAIIDAN;
 
-        Debug.Log("Manage-Kushan");
+
+        //TESTING
+        Account.LoadExistingPlayer(Account.GetPlayerName());
+        //
+
+        factions.Add(kushan);
+        factions.Add(taiidan);
+
         Debug.Log(Account.playername);
         Account.PrintCollection(0);
 
-        List<string> tempCollection = Account.GetFactionCollection(kushan);
-        foreach(string cardname in tempCollection)
+
+        ActiveFactionIndex = 0;
+        LoadFaction();
+        Collection.TransferCards(factionCollections[ActiveFactionIndex].gameObject, factions[ActiveFactionIndex]);
+
+
+        ActiveFactionIndex = 1;
+        LoadFaction();
+        List<GameObject> cards = Collection.TransferCards(factionCollections[ActiveFactionIndex].gameObject, factions[ActiveFactionIndex]);
+        foreach (GameObject card in cards)
         {
-            card = AllCards.CreateCard(cardname);
-            Collection.AddCard(card);
+            card.transform.localScale = new Vector2(.6f, .6f);
         }
+        DeactivateCollection();
 
-        // Default View - All cards
+        ActiveFactionIndex = 0;
 
-        Collection.TransferCards(Manage_Collection.gameObject, kushan);
-
-        deck_list = Account.GetDeck(0);
-        Debug.Log(string.Join(" ", deck_list.ToArray()));
-        Manage_Collection.ListTransfer(deck_list, Manage_Deck1.gameObject.transform);
-        deck_list = Account.GetDeck(1);
-        Manage_Collection.ListTransfer(deck_list, Manage_Deck2.gameObject.transform);
-        deck_list = Account.GetDeck(2);
-        Manage_Collection.ListTransfer(deck_list, Manage_Deck3.gameObject.transform);
+        PopulateDecks();
 
         Manage_Deck2.gameObject.SetActive(false);
         Manage_Deck3.gameObject.SetActive(false);
@@ -57,7 +69,7 @@ public class Management_Scene_Handler : MonoBehaviour
 
     public void Change_Deck(int val)
     {
-        switch(val)
+        switch (val)
         {
             case 0:
                 if (!Manage_Deck1.gameObject.activeSelf)
@@ -65,6 +77,7 @@ public class Management_Scene_Handler : MonoBehaviour
                     Manage_Deck1.gameObject.SetActive(true);
                     Selector.SetActiveDeck(Manage_Deck1);
                     Stats.SetActiveDeck(Manage_Deck1);
+                    DeckContent.content = Manage_Deck1.gameObject.GetComponent<RectTransform>();
                 }
                 if (Manage_Deck2.gameObject.activeSelf)
                 {
@@ -85,6 +98,7 @@ public class Management_Scene_Handler : MonoBehaviour
                     Selector.SetActiveDeck(Manage_Deck2);
                     Stats.SetActiveDeck(Manage_Deck2);
                     Manage_Deck2.gameObject.SetActive(true);
+                    DeckContent.content = Manage_Deck2.gameObject.GetComponent<RectTransform>();
                 }
                 if (Manage_Deck3.gameObject.activeSelf)
                 {
@@ -105,6 +119,7 @@ public class Management_Scene_Handler : MonoBehaviour
                     Selector.SetActiveDeck(Manage_Deck3);
                     Stats.SetActiveDeck(Manage_Deck3);
                     Manage_Deck3.gameObject.SetActive(true);
+                    DeckContent.content = Manage_Deck3.gameObject.GetComponent<RectTransform>();
                 }
                 break;
             default:
@@ -113,6 +128,7 @@ public class Management_Scene_Handler : MonoBehaviour
                     Selector.SetActiveDeck(Manage_Deck1);
                     Stats.SetActiveDeck(Manage_Deck1);
                     Manage_Deck1.gameObject.SetActive(true);
+                    DeckContent.content = Manage_Deck1.gameObject.GetComponent<RectTransform>();
                 }
                 if (Manage_Deck2.gameObject.activeSelf)
                 {
@@ -129,7 +145,6 @@ public class Management_Scene_Handler : MonoBehaviour
     public void Ready()
     {
         Save();
-        Account.UpdateSaveFile();
         SceneManager.LoadScene("CQBPrototype2");
     }
 
@@ -138,6 +153,92 @@ public class Management_Scene_Handler : MonoBehaviour
         Account.SetDeck(1, Manage_Deck1.GetList());
         Account.SetDeck(2, Manage_Deck2.GetList());
         Account.SetDeck(3, Manage_Deck3.GetList());
+        Account.UpdateSaveFile();
     }
 
+    public void NextFaction(int increment)
+    {
+        Save();
+        Account.UpdateSaveFile();
+        DeactivateCollection();
+        ActiveFactionIndex += increment;
+        if (ActiveFactionIndex > 1)
+        {
+            ActiveFactionIndex = ActiveFactionIndex % 1;
+        }
+        else if (ActiveFactionIndex < 0)
+        {
+            ActiveFactionIndex = 1;
+        }
+        ActivateCollection();
+        FactionSymbol.sprite = factionsymbols[ActiveFactionIndex];
+        Selector.SetActiveCollection(factionCollections[ActiveFactionIndex]);
+        CollectionContent.content = factionCollections[ActiveFactionIndex].gameObject.GetComponent<RectTransform>();
+    }
+
+    private void LoadFaction()
+    {
+        GameObject card;
+        List<string> tempCollection = Account.GetFactionCollection(factions[ActiveFactionIndex]);
+        foreach (string cardname in tempCollection)
+        {
+            card = AllCards.CreateCard(cardname);
+            Collection.AddCard(card);
+        }
+    }
+
+    private void DeactivateCollection()
+    {
+        if (factionCollections[ActiveFactionIndex].gameObject.activeSelf)
+        {
+            factionCollections[ActiveFactionIndex].gameObject.SetActive(false);
+        }
+    }
+
+    private void ActivateCollection()
+    {
+        factionCollections[ActiveFactionIndex].gameObject.SetActive(true);
+
+    }
+
+    private void PopulateDecks()
+    {
+        int index;
+        for(int i = 0; i < decks.Count; i++)
+        {
+            deck_list = Account.GetDeck(i);
+            index = DetermineFaction(deck_list);
+            if(index != -1)
+            {
+                factionCollections[index].ListTransfer(deck_list, decks[i].gameObject.transform);
+            }
+        }
+    }
+
+    private int DetermineFaction(List<string> deck)
+    {
+        string name;
+        string[] name_parts;
+
+        if (deck.Count > 0)
+        {
+            name = deck[0];
+            name_parts = name.Split('_');
+            if (name_parts[0].Equals("Kushan"))
+            {
+                return 0;
+            }
+
+            else if (name_parts[0].Equals("Taiidan"))
+            {
+                return 1;
+            }
+            else
+            {
+                Debug.LogError("Error in loading decks");
+                SceneManager.LoadScene("Management");
+            }
+        }
+        return -1;
+    }
 }

@@ -10,11 +10,13 @@ public class GameMaster : MonoBehaviour
     [SerializeField] private SP_Deck OpponentDeck;
     [SerializeField] private Player_Behavior RoundWinner;
     [SerializeField] private Player_Behavior Opponent;
+    [SerializeField] private EnemyBehavior enemyBehavior;
     [SerializeField] private Player_Behavior Player;
     [SerializeField] private GameStateSingle player;
     [SerializeField] private GameStateSingle opponent;
     [SerializeField] private SP_PlayerCounter playerCounter;
     [SerializeField] private SP_PlayerCounter opponentCounter;
+    [SerializeField] private GameObject Animator;
     [SerializeField] private GameObject OutcomeObject;
     [SerializeField] private Outcome Outcome;
     [SerializeField] private AccountCharacteristics Account;
@@ -34,6 +36,7 @@ public class GameMaster : MonoBehaviour
     [SerializeField] private GameObject playedCard;
     [SerializeField] private Player_Behavior CurrentPlayer;
     [SerializeField] private Player_Behavior NextPlayer;
+    [SerializeField] private bool waiting;
 
 
 
@@ -42,7 +45,7 @@ public class GameMaster : MonoBehaviour
         Account = GameObject.Find("ActiveAccount").GetComponent<AccountCharacteristics>();
         Outcome = OutcomeObject.GetComponent<Outcome>();
         player_cards = GameObject.Find("SP_DealCards").GetComponent<DrawCardsSingle>().NumberOfCards();
-
+        waiting = false;
         
 
         SelectedBoard = SelectBoard();
@@ -58,13 +61,13 @@ public class GameMaster : MonoBehaviour
 
     public void NextTurn()
     {
-        if (cardsDelt)
+/*        if (cardsDelt)
         {
             if (opponent.isPlayersTurn())
             {
                 if (Opponent.GetHand().GetNumberOfCards() > 0)
                 {
-                    playedCard = Opponent.GetComponent<Player_Behavior>().make_a_move();
+                    enemyBehavior.make_a_move();
 
                 }
                 else
@@ -85,7 +88,6 @@ public class GameMaster : MonoBehaviour
                 }
                 Outcome.Display(outcome);
                 Debug.Log(outcome);
-                RollForInitiative();
                 Invoke("ResetBoard", 2);
                 if (cardsDelt == false)
                 {
@@ -114,26 +116,25 @@ public class GameMaster : MonoBehaviour
         }
         DetermineNewStates();
         playerCounter.Counter();
-        opponentCounter.Counter();
+        opponentCounter.Counter();*/
     }
 
     private void Update()
     {
         if (cardsDelt)
         {
-            if (opponent.isPlayersTurn())
+            if (!enemyBehavior.IsMakingMove() && opponent.isPlayersTurn())
             {
                 if (Opponent.GetHand().GetNumberOfCards() > 0)
                 {
-                    playedCard = Opponent.GetComponent<Player_Behavior>().make_a_move();
-
+                    enemyBehavior.make_a_move();
                 }
                 else
                 {
                     Opponent.GetPlayerState().SetPassing();
                 }
             }
-            else if (player.isPlayersPassing() && opponent.isPlayersPassing())
+            else if (player.isPlayersPassing() && opponent.isPlayersPassing() && !waiting)
             {
 
                 playerCounter.Counter();
@@ -146,7 +147,7 @@ public class GameMaster : MonoBehaviour
                 }
                 Outcome.Display(outcome);
                 Debug.Log(outcome);
-                RollForInitiative();
+                waiting = true;
                 Invoke("ResetBoard", 2);
                 if (cardsDelt == false)
                 {
@@ -167,15 +168,11 @@ public class GameMaster : MonoBehaviour
                 }
                 return;
             }
+            else if(Player.GetPlayerState().isPlayersPassing())
+            {
+                DetermineNewStates();
+            }
         }
-        if (playedCard != null)
-        {
-            ApplyCardModifiers(playedCard, CurrentPlayer, NextPlayer);
-            playedCard = null;
-        }
-        DetermineNewStates();
-        playerCounter.Counter();
-        opponentCounter.Counter();
     }
 
     private string DetermineRoundWinner()
@@ -308,6 +305,8 @@ public class GameMaster : MonoBehaviour
         opponentCounter.Counter();
         Player.ResetPassing();
         Opponent.ResetPassing();
+        RollForInitiative();
+        waiting = false;
     }
 
     public void EnableBoard()
@@ -412,6 +411,9 @@ public class GameMaster : MonoBehaviour
                 ModifierCharacteristics.ECM(card);
                 card.GetComponent<CQBCard>().SetEnviro();
                 break;
+            case Modifiers.EnviroModifier.JunkYard:
+                ModifierCharacteristics.JunkYard(Player,Opponent);
+                break;
         }
     }
 
@@ -434,9 +436,9 @@ public class GameMaster : MonoBehaviour
         }
         else
         {
-            if (card.GetComponent<CQBCard>().HasAbility() && !card.GetComponent<CQBCard>().Suppressed())
+            if (card.GetComponent<CardModifier>().HasAbility() && !card.GetComponent<CQBCard>().Suppressed()) 
             {
-                Modifiers.CardModifiers ability = card.GetComponent<CQBCard>().GetAbility();
+                Modifiers.CardModifiers ability = card.GetComponent<CardModifier>().GetModifier();     
                 switch (ability)
                 {
                     case Modifiers.CardModifiers.BattleBuddiesAssault:
@@ -446,12 +448,30 @@ public class GameMaster : MonoBehaviour
                         ModifierCharacteristics.BattleBuddiesIon(card, player);
                         break;
                     case Modifiers.CardModifiers.HunterPack:
+                        ModifierCharacteristics.HunterPack(card, player);
                         break;
-                    case Modifiers.CardModifiers.Anti_Strike:
+                    case Modifiers.CardModifiers.Anti_Fighter:
+                        ModifierCharacteristics.Anti_Fighter(opponent);
                         break;
-                    case Modifiers.CardModifiers.Bomber:
+                    case Modifiers.CardModifiers.Anti_Frigate:
+                        ModifierCharacteristics.Anti_Frigate(opponent);
+                        break;
+                    case Modifiers.CardModifiers.Anti_Capital:
+                        ModifierCharacteristics.Anti_Capital(opponent);
                         break;
                     case Modifiers.CardModifiers.Quick_Deploy:
+                        ModifierCharacteristics.Quick_Deploy(card, player);
+                        break;
+                    case Modifiers.CardModifiers.CAP:
+                        ModifierCharacteristics.CAP(card, player);
+                        break;
+                    case Modifiers.CardModifiers.DECOY:
+                        ModifierCharacteristics.Decoy(card, player);
+                        break;
+                    case Modifiers.CardModifiers.SPY:
+                        card.transform.SetParent(opponent.GetPlayField().transform);
+                        player.GetDeck().DealCards(2, player.GetHand().gameObject);
+                        ApplyModifiers(player);
                         break;
                 }
             }
@@ -462,5 +482,17 @@ public class GameMaster : MonoBehaviour
     public void SetPlayedCard(GameObject card)
     {
         playedCard = card;
+    }
+
+    public void Continue()
+    {
+        if (playedCard != null)
+        {
+            ApplyCardModifiers(playedCard, CurrentPlayer, NextPlayer);
+            playedCard = null;
+        }
+        DetermineNewStates();
+        playerCounter.Counter();
+        opponentCounter.Counter();
     }
 }

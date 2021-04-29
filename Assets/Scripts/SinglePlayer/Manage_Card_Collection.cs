@@ -5,16 +5,8 @@ using System.Linq;
 
 public class Manage_Card_Collection : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> Kushan_cards;
-    [SerializeField] private List<GameObject> Taiidan_cards;
-
     [SerializeField] private List<string> list;
 
-    public void Start()
-    {
-        this.Kushan_cards = new List<GameObject>();
-        this.Taiidan_cards = new List<GameObject>();
-    }
 
     public void AddCard(GameObject card)
     {
@@ -133,4 +125,5 @@ public class Manage_Card_Collection : MonoBehaviour
         }
         this.list = cards;
     }
+
 }

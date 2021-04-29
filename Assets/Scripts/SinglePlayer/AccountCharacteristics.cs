@@ -18,6 +18,8 @@ public class AccountCharacteristics : MonoBehaviour
 
     [SerializeField] private List<string>[] decks;
 
+    [SerializeField] private int minimumDeckCount;
+
     //Collections
     [SerializeField] private List<string> Kushan_cards;
     [SerializeField] private List<string> Taiidan_cards;
@@ -65,7 +67,10 @@ public class AccountCharacteristics : MonoBehaviour
     {
         this.playername = player_name;
         CreateNewCollection();
-        deck1 = GetStarterKushan();
+        if (faction == CQBCard.FactionType.KUSHAN)
+            deck1 = GetStarterKushan();
+        else if (faction == CQBCard.FactionType.TAIIDAN)
+            deck1 = GetStarterTaiidan();
         save = new SaveFile(playername, deck1, deck2, deck3, Kushan_cards, Taiidan_cards);
         CreateSaveFile(playername+"Save", save);
     }
@@ -195,14 +200,29 @@ public class AccountCharacteristics : MonoBehaviour
 
     public List<string> GetStarterKushan()
     {
-        Random.InitState(12345);
+        Random.InitState((int)Time.realtimeSinceStartup * 1000);
         int index;
         string card;
         List<string> tempDeck = new List<string>();
-        for(int i = 0; i <= 5; i++)
+        for(int i = 0; i <= minimumDeckCount; i++)
         {
             index = Random.Range(0, Kushan_cards.Count);
             card = Kushan_cards[index];
+            tempDeck.Add(card);
+        }
+        return tempDeck;
+    }
+
+    public List<string> GetStarterTaiidan()
+    {
+        Random.InitState((int)Time.realtimeSinceStartup * 1000);
+        int index;
+        string card;
+        List<string> tempDeck = new List<string>();
+        for (int i = 0; i <= minimumDeckCount; i++)
+        {
+            index = Random.Range(0, Taiidan_cards.Count);
+            card = Taiidan_cards[index];
             tempDeck.Add(card);
         }
         return tempDeck;
@@ -259,17 +279,40 @@ public class AccountCharacteristics : MonoBehaviour
 
         //Default Taiidan Ships
         this.Taiidan_cards.Add("Taiidan_Assault_Frigate");
+        this.Taiidan_cards.Add("Taiidan_Assault_Frigate");
+        this.Taiidan_cards.Add("Taiidan_Assault_Frigate");
+        this.Taiidan_cards.Add("Taiidan_Attack_Bomber");
+        this.Taiidan_cards.Add("Taiidan_Attack_Bomber");
+        this.Taiidan_cards.Add("Taiidan_Attack_Bomber");
+        this.Taiidan_cards.Add("Taiidan_Attack_Bomber");
         this.Taiidan_cards.Add("Taiidan_Attack_Bomber");
         this.Taiidan_cards.Add("Taiidan_Carrier");
         this.Taiidan_cards.Add("Taiidan_Decoy");
+        this.Taiidan_cards.Add("Taiidan_Decoy");
         this.Taiidan_cards.Add("Taiidan_Destroyer");
+        this.Taiidan_cards.Add("Taiidan_Destroyer");
+        this.Taiidan_cards.Add("Taiidan_Destroyer");
+        this.Taiidan_cards.Add("Taiidan_Heavy_Corvette");
         this.Taiidan_cards.Add("Taiidan_Heavy_Corvette");
         this.Taiidan_cards.Add("Taiidan_Heavy_Cruiser");
         this.Taiidan_cards.Add("Taiidan_Interceptor");
+        this.Taiidan_cards.Add("Taiidan_Interceptor");
+        this.Taiidan_cards.Add("Taiidan_Interceptor");
+        this.Taiidan_cards.Add("Taiidan_Interceptor");
+        this.Taiidan_cards.Add("Taiidan_Interceptor");
+        this.Taiidan_cards.Add("Taiidan_Interceptor");
+        this.Taiidan_cards.Add("Taiidan_Ion_Frigate");
+        this.Taiidan_cards.Add("Taiidan_Ion_Frigate");
         this.Taiidan_cards.Add("Taiidan_Ion_Frigate");
         this.Taiidan_cards.Add("Taiidan_Light_Corvette");
         this.Taiidan_cards.Add("Taiidan_Missle_Destroyer");
         this.Taiidan_cards.Add("Taiidan_Multigun_Corvette");
+        this.Taiidan_cards.Add("Taiidan_Multigun_Corvette");
+        this.Taiidan_cards.Add("Taiidan_Multigun_Corvette");
+        this.Taiidan_cards.Add("Taiidan_Scout_Fighter");
+        this.Taiidan_cards.Add("Taiidan_Scout_Fighter");
+        this.Taiidan_cards.Add("Taiidan_Scout_Fighter");
+        this.Taiidan_cards.Add("Taiidan_Scout_Fighter");
         this.Taiidan_cards.Add("Taiidan_Scout_Fighter");
     }
     public List<string> GetFactionCards(CQBCard.FactionType faction)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CardPositionAnimator : MonoBehaviour
 {
-    private GameObject card;
+    [SerializeField] private GameObject card;
     [Range(0.01f, 1f)] [SerializeField] private float animationSpeed;
     [SerializeField] private Vector2 defaultAnimateToPosition;
     private Vector2 animateToPosition;
@@ -14,7 +14,7 @@ public class CardPositionAnimator : MonoBehaviour
     private float incrementX;
     private float incrementY;
 
-    private bool isAnimating;
+    [SerializeField] private bool isAnimating;
 
     void Start()
     {
@@ -54,6 +54,7 @@ public class CardPositionAnimator : MonoBehaviour
             card.transform.position = animateToPosition;
             isAnimating = false;
             animateToPosition = defaultAnimateToPosition;
+            card = null;
         }
     }
 
