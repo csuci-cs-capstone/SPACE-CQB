@@ -7,9 +7,11 @@ public class ModifierCharacteristics : MonoBehaviour
     [SerializeField] private Modifiers.EnviroModifier Modifier;
     [SerializeField] private GameObject Token;
     [SerializeField] private GameObject Descriptor;
+    [SerializeField] private GameObject AbilityIneractionField;
     [SerializeField] static private int MAXQUICKDEPLOY = 5;
     [SerializeField] static private int SPYREINFORCE = 2;
     [SerializeField] static private int JUNKYARDCHANCE = 30;
+
 
 
     public GameObject CreateToken()
@@ -71,8 +73,8 @@ public class ModifierCharacteristics : MonoBehaviour
     }
     static public void ECM(GameObject card)
     {
-        if(card.GetComponent<CardModifier>().HasAbility())     /////////////////////////
-        {
+        if(card.GetComponent<CardModifier>().HasAbility())
+        { 
             card.GetComponent<CQBCard>().ActivateNegativeSymbol();
         }
     }
@@ -221,8 +223,8 @@ public class ModifierCharacteristics : MonoBehaviour
     {
         List<GameObject> playfield = combatant.GetPlayField().GetComponent<SP_CardPile>().GetCardsInCardPile();
         int siblingIndex = 0;
-        int new_power = 0;
-        int index = 0;
+        int new_power;
+        int index;
         List<GameObject> pack = new List<GameObject>();
         foreach (GameObject card in playfield)
         {
@@ -253,9 +255,28 @@ public class ModifierCharacteristics : MonoBehaviour
         }
     }
 
-    static public void Quick_Deploy(GameObject current_card, Player_Behavior player)
+    static public void Quick_Deploy(Player_Behavior player)
     {
-        Debug.Log("TODO");
+        List<GameObject> cards = player.GetDeck().GetCards();
+        int deployed = 0;
+        for(int i = 0; i < cards.Count && deployed < MAXQUICKDEPLOY; i++)
+        {
+            if(cards[i].GetComponent<CQBCard>().GetUnitType() == CQBCard.UnitType.FIGHTER)
+            {
+                cards[i].GetComponent<CQBCard>().ActivatePlayable();
+                cards[i].transform.SetParent(player.GetPlayField().transform);
+                deployed++;
+            }
+        }
+        cards = player.GetHand().GetCardsInCardPile();
+        for(int i = 0; i < cards.Count && deployed < MAXQUICKDEPLOY; i++)
+        {
+            if (cards[i].GetComponent<CQBCard>().GetUnitType() == CQBCard.UnitType.FIGHTER)
+            {
+                cards[i].transform.SetParent(player.GetPlayField().transform);
+                deployed++;
+            }
+        }
     }
     static public void Decoy(GameObject current_card, Player_Behavior player)
     {
@@ -264,5 +285,11 @@ public class ModifierCharacteristics : MonoBehaviour
     static public void CAP(GameObject current_card, Player_Behavior player)
     {
         Debug.Log("TODO");
+    }
+
+    static public void SPY(GameObject current_card, Player_Behavior player, Player_Behavior opponent)
+    {
+        player.GetDeck().DealCards(2, player.GetHand().gameObject);
+        current_card.transform.SetParent(opponent.GetPlayField().transform);
     }
 }

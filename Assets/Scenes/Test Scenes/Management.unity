@@ -1408,6 +1408,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6935620523227465546, guid: 1abe8079c4f797e4bbf49a94b1d618c2,
         type: 3}
+    - target: {fileID: 6435100522277268287, guid: cff9446760b55bc44b00d0041ee9c7bb,
+        type: 3}
+      propertyPath: Kushan_Spy_Corvette
+      value: 
+      objectReference: {fileID: 6935620523227465546, guid: c9b5fd12892765448b348750e6efbc99,
+        type: 3}
+    - target: {fileID: 6435100522277268287, guid: cff9446760b55bc44b00d0041ee9c7bb,
+        type: 3}
+      propertyPath: Taiidan_Cloak
+      value: 
+      objectReference: {fileID: 6935620523227465546, guid: 747c7d5bebc8e0544b1c5d8bf47698a1,
+        type: 3}
     - target: {fileID: 6742602010176355927, guid: cff9446760b55bc44b00d0041ee9c7bb,
         type: 3}
       propertyPath: m_Name
@@ -2079,6 +2091,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1955572673}
     m_Modifications:
+    - target: {fileID: 1903322480, guid: 47227e461da20b1498ee9699c123c40d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.0000076294
+      objectReference: {fileID: 0}
+    - target: {fileID: 1903322480, guid: 47227e461da20b1498ee9699c123c40d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.75999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1903322480, guid: 47227e461da20b1498ee9699c123c40d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 272.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1903322480, guid: 47227e461da20b1498ee9699c123c40d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 148.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1903322481, guid: 47227e461da20b1498ee9699c123c40d, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 30711912591722864, guid: 47227e461da20b1498ee9699c123c40d,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -4568,7 +4600,7 @@ PrefabInstance:
     - target: {fileID: 6710663698800689024, guid: 574913fdf5c40934aba589184c158f2d,
         type: 3}
       propertyPath: playername
-      value: Chris
+      value: Roger
       objectReference: {fileID: 0}
     - target: {fileID: 8324107141156624576, guid: 574913fdf5c40934aba589184c158f2d,
         type: 3}

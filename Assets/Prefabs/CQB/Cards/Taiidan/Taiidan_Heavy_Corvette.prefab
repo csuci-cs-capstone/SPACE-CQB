@@ -856,7 +856,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1412405665698091168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2191,7 +2191,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2968178623046755925
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2820,6 +2820,7 @@ GameObject:
   - component: {fileID: 6935620523227465547}
   - component: {fileID: -639650797806590267}
   - component: {fileID: 307604203434130714}
+  - component: {fileID: -808123563565662320}
   m_Layer: 5
   m_Name: Taiidan_Heavy_Corvette
   m_TagString: Untagged
@@ -2958,6 +2959,19 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
+--- !u!114 &-808123563565662320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6935620523227465546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d807f2170d4668e4aa7c4a797d17d419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Modifier: 0
 --- !u!1 &6963411471463529016
 GameObject:
   m_ObjectHideFlags: 0
@@ -3657,7 +3671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3142082929985614261
 RectTransform:
   m_ObjectHideFlags: 0

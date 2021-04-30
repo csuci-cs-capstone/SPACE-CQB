@@ -28,6 +28,8 @@ public class Modifiers : MonoBehaviour
         EMP,
         DECOY,
         SPY,
-        CAP
+        CAP,
+        ReDeploy,
+        Support
     }
 }

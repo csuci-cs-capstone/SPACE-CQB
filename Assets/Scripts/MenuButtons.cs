@@ -14,7 +14,6 @@ public class MenuButtons : MonoBehaviour
     private void Start()
     {
         MainMenuButton = GameObject.Find("MainMenu Button").GetComponent<Buttons>();
-        TutorialButton = GameObject.Find("Tutorial Button").GetComponent<Buttons>();
         QuitButton = GameObject.Find("Quit Button").GetComponent<Buttons>();
         pressed = false;
         TurnButtonsOff();
@@ -23,14 +22,12 @@ public class MenuButtons : MonoBehaviour
     private void TurnButtonsOff()
     {
         MainMenuButton.TurnOff();
-        TutorialButton.TurnOff();
         QuitButton.TurnOff();
     }
 
     private void TurnButtonsOn()
     {
         MainMenuButton.TurnOn();
-        TutorialButton.TurnOn();
         QuitButton.TurnOn();
     } 
     public void OnPress()

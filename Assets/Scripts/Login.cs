@@ -14,21 +14,19 @@ public class Login : MonoBehaviour
     public GameObject Taiidandeck;
     public InputField Registration_player_name;
     public InputField Login_player_name;
+    [SerializeField] private GameObject ErrorPopup;
 
     void Start()
     {
         account = GameObject.Find("ActiveAccount").GetComponent<AccountCharacteristics>();
+        DeactivateError();
         if(account.GetPlayerName().CompareTo("") == 0)
         {
-            MainMenu.SetActive(false);
-            Registration.SetActive(false);
-            LoginScreen.SetActive(true);
+            LogOut();
         }
         else
         {
-            MainMenu.SetActive(true);
-            Registration.SetActive(false);
-            LoginScreen.SetActive(false);
+            ActivateMain();
         }
     }
 
@@ -89,9 +87,17 @@ public class Login : MonoBehaviour
     {
         if (Login_player_name.text != "")
         {
-            Debug.Log("Player Name: " + Login_player_name.text);
-            account.LoadExistingPlayer(Login_player_name.text);
-            ActivateMain();
+            try
+            {
+                Debug.Log("Player Name: " + Login_player_name.text);
+                account.LoadExistingPlayer(Login_player_name.text);
+                ActivateMain();
+            }
+            catch
+            {
+                ActivateError();
+                Invoke("DeactivateError", 2);
+            }
         }
         else
             Debug.LogError("No Input detected.");
@@ -110,6 +116,19 @@ public class Login : MonoBehaviour
     public void CloseApplication()
     {
         Application.Quit();
+    }
+
+    private void DeactivateError()
+    {
+        if(ErrorPopup.activeSelf)
+        {
+            ErrorPopup.SetActive(false);
+        }
+    }
+
+    private void ActivateError()
+    {
+        ErrorPopup.SetActive(true);
     }
 
 }

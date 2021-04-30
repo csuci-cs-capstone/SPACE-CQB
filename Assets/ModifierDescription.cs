@@ -22,6 +22,10 @@ public class ModifierDescription : MonoBehaviour
     [SerializeField] private GameObject ActiveDescriptor;
     [SerializeField] private GameObject PlayerHand;
     [SerializeField] private GameObject PlayerField;
+    [SerializeField] private GameObject PreGame1;
+    [SerializeField] private GameObject PreGame2;
+    [SerializeField] private GameObject PreGame3;
+    [SerializeField] private GameObject OpponentField;
 
     private void Start()
     {
@@ -37,7 +41,7 @@ public class ModifierDescription : MonoBehaviour
         if (hitObject != null && selectedObject == null)
         {
             selectedObject = hitObject;
-            if(selectedObject.GetComponent<CardModifier>() != null && (selectedObject.transform.IsChildOf(PlayerHand.transform) || selectedObject.transform.IsChildOf(PlayerField.transform)))
+            if (selectedObject.GetComponent<CardModifier>() != null && (selectedObject.transform.IsChildOf(PlayerHand.transform) || selectedObject.transform.IsChildOf(PlayerField.transform) || selectedObject.transform.IsChildOf(OpponentField.transform) || selectedObject.transform.IsChildOf(PreGame1.transform) || selectedObject.transform.IsChildOf(PreGame2.transform) || selectedObject.transform.IsChildOf(PreGame3.transform)))
             {
                 Modifiers.CardModifiers modifier = selectedObject.GetComponent<CardModifier>().GetModifier();
                 switch (modifier)

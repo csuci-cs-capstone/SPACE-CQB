@@ -1229,7 +1229,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5454857824996531166
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2387,7 +2387,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2195364032194845562
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2575,6 +2575,10 @@ MonoBehaviour:
   BaseSymbol: {fileID: 913128267602744756}
   PositiveSymbol: {fileID: 3412989759197369765}
   NegativeSymbol: {fileID: 6541105782286180836}
+  is_enviro_modified: 0
+  is_modified_buddy: 0
+  is_modified_hunter: 0
+  is_debuffed: 0
 --- !u!61 &6935620523227465547
 BoxCollider2D:
   m_ObjectHideFlags: 0

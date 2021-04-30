@@ -274,8 +274,8 @@ public class AccountCharacteristics : MonoBehaviour
         this.Kushan_cards.Add("Kushan_Multigun_Corvette");
         this.Kushan_cards.Add("Kushan_Scout");
         this.Kushan_cards.Add("Kushan_Support_Frigate");
-        this.Kushan_cards.Add("Kushan_Salvage_Corvette");
-        this.Kushan_cards.Add("Kushan_Repair_Corvette");
+        this.Kushan_cards.Add("Kushan_Spy_Corvette");
+        this.Kushan_cards.Add("Kushan_Spy_Corvette");
 
         //Default Taiidan Ships
         this.Taiidan_cards.Add("Taiidan_Assault_Frigate");
@@ -289,6 +289,8 @@ public class AccountCharacteristics : MonoBehaviour
         this.Taiidan_cards.Add("Taiidan_Carrier");
         this.Taiidan_cards.Add("Taiidan_Decoy");
         this.Taiidan_cards.Add("Taiidan_Decoy");
+        this.Taiidan_cards.Add("Taiidan_Cloak");
+        this.Taiidan_cards.Add("Taiidan_Cloak");
         this.Taiidan_cards.Add("Taiidan_Destroyer");
         this.Taiidan_cards.Add("Taiidan_Destroyer");
         this.Taiidan_cards.Add("Taiidan_Destroyer");

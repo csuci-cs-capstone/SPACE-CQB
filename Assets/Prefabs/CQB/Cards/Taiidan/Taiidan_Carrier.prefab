@@ -791,7 +791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7954028929415624584
 RectTransform:
   m_ObjectHideFlags: 0
@@ -966,7 +966,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.3
-  m_Text: 
+  m_Text: 'Quick Deploy:
+
+    Draws and plays up to 5 scout fighter cards'
 --- !u!114 &1650187399135311287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1060,7 +1062,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 206cafa97425fe849a7d81482d644f18, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ce9b56bb43380604bb0047a8a978b141, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1279,7 +1281,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 206cafa97425fe849a7d81482d644f18, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ce9b56bb43380604bb0047a8a978b141, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1925,7 +1927,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6878824271962916603
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2355,7 +2357,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 3
 --- !u!114 &3553994969643719359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2474,6 +2476,7 @@ GameObject:
   - component: {fileID: 6935620523227465547}
   - component: {fileID: -6417502262638586944}
   - component: {fileID: 3620695727297178529}
+  - component: {fileID: 7325727258663710916}
   m_Layer: 5
   m_Name: Taiidan_Carrier
   m_TagString: Untagged
@@ -2534,7 +2537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardName: Carrier
-  power: 0
+  power: 3
   fieldType: 4
   cardType: 1
   unitType: 3
@@ -2612,6 +2615,19 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
+--- !u!114 &7325727258663710916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6935620523227465546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d807f2170d4668e4aa7c4a797d17d419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Modifier: 0
 --- !u!1 &7037880103667845873
 GameObject:
   m_ObjectHideFlags: 0
@@ -3364,7 +3380,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5515089511592917240
 RectTransform:
   m_ObjectHideFlags: 0

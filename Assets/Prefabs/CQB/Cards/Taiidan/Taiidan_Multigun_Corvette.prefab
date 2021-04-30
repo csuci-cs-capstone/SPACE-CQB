@@ -88,7 +88,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5845512789930762240
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1164,7 +1164,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 206cafa97425fe849a7d81482d644f18, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6da8b81f1067fea40b9a40f26e55d25c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1947,7 +1947,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &484727528636709676
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2058,6 +2058,7 @@ GameObject:
   - component: {fileID: 6935620523227465547}
   - component: {fileID: -51606510909780373}
   - component: {fileID: -2343589977161546000}
+  - component: {fileID: 7122755867586100388}
   m_Layer: 5
   m_Name: Taiidan_Multigun_Corvette
   m_TagString: Untagged
@@ -2196,6 +2197,19 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
+--- !u!114 &7122755867586100388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6935620523227465546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d807f2170d4668e4aa7c4a797d17d419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Modifier: 0
 --- !u!1 &7034909932325165849
 GameObject:
   m_ObjectHideFlags: 0
@@ -2332,7 +2346,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 206cafa97425fe849a7d81482d644f18, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6da8b81f1067fea40b9a40f26e55d25c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2614,7 +2628,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1182516313130770520
 RectTransform:
   m_ObjectHideFlags: 0

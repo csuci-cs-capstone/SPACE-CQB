@@ -18,12 +18,12 @@ public class GameCardsBehavior : MonoBehaviour
     public GameObject Kushan_Multigun_Corvette;
     public GameObject Kushan_Scout;
     public GameObject Kushan_Support_Frigate;
-    public GameObject Kushan_Salvage_Corvette;
-    public GameObject Kushan_Repair_Corvette;
+    public GameObject Kushan_Spy_Corvette;
 
     public GameObject Taiidan_Assault_Frigate;
     public GameObject Taiidan_Attack_Bomber;
     public GameObject Taiidan_Carrier;
+    public GameObject Taiidan_Cloak;
     public GameObject Taiidan_Decoy;
     public GameObject Taiidan_Destroyer;
     public GameObject Taiidan_Heavy_Corvette;
@@ -83,11 +83,8 @@ public class GameCardsBehavior : MonoBehaviour
             case "Kushan_Support_Frigate":
                 card = Kushan_Support_Frigate;
                 break;
-            case "Kushan_Salvage_Corvette":
-                card = Kushan_Salvage_Corvette;
-                break;
-            case "Kushan_Repair_Corvette":
-                card = Kushan_Repair_Corvette;
+            case "Kushan_Spy_Corvette":
+                card = Kushan_Spy_Corvette;
                 break;
             case "Taiidan_Assault_Frigate":
                 card = Taiidan_Assault_Frigate;
@@ -97,6 +94,9 @@ public class GameCardsBehavior : MonoBehaviour
                 break;
             case "Taiidan_Carrier":
                 card = Taiidan_Carrier;
+                break;
+            case "Taiidan_Cloak":
+                card = Taiidan_Cloak;
                 break;
             case "Taiidan_Decoy":
                 card = Taiidan_Decoy;

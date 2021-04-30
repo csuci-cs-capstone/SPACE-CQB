@@ -1024,7 +1024,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &183190211951404715
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2590,6 +2590,7 @@ GameObject:
   - component: {fileID: 6935620523227465547}
   - component: {fileID: 8270210548514891637}
   - component: {fileID: 4149039824184043540}
+  - component: {fileID: 3541079487696618405}
   m_Layer: 5
   m_Name: Taiidan_Interceptor
   m_TagString: Untagged
@@ -2728,6 +2729,19 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
+--- !u!114 &3541079487696618405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6935620523227465546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d807f2170d4668e4aa7c4a797d17d419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Modifier: 0
 --- !u!1 &6955896755822800928
 GameObject:
   m_ObjectHideFlags: 0

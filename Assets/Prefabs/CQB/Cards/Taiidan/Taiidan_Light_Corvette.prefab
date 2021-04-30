@@ -2558,6 +2558,7 @@ GameObject:
   - component: {fileID: 6935620523227465547}
   - component: {fileID: 7635393734078335799}
   - component: {fileID: -1937214509850029763}
+  - component: {fileID: -495426916579448107}
   m_Layer: 5
   m_Name: Taiidan_Light_Corvette
   m_TagString: Untagged
@@ -2696,6 +2697,19 @@ MonoBehaviour:
   localPositionSensitivity: 0.01
   localRotationSensitivity: 0.01
   localScaleSensitivity: 0.01
+--- !u!114 &-495426916579448107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6935620523227465546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d807f2170d4668e4aa7c4a797d17d419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Modifier: 0
 --- !u!1 &7299556707693445075
 GameObject:
   m_ObjectHideFlags: 0

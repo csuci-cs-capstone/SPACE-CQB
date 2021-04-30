@@ -27,7 +27,7 @@ public class MainManu : MonoBehaviour
 
     public void GametoMainMenu()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene("MainMenu1");
     }
 
     public void GametoTutorial()

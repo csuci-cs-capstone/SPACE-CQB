@@ -61,6 +61,8 @@ public class Management_Scene_Handler : MonoBehaviour
 
         ActiveFactionIndex = 0;
 
+        Selector.SetActiveCollection(factionCollections[ActiveFactionIndex]);
+
         PopulateDecks();
 
         Manage_Deck2.gameObject.SetActive(false);

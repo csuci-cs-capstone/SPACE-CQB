@@ -16,7 +16,6 @@ public class GameMaster : MonoBehaviour
     [SerializeField] private GameStateSingle opponent;
     [SerializeField] private SP_PlayerCounter playerCounter;
     [SerializeField] private SP_PlayerCounter opponentCounter;
-    [SerializeField] private GameObject Animator;
     [SerializeField] private GameObject OutcomeObject;
     [SerializeField] private Outcome Outcome;
     [SerializeField] private AccountCharacteristics Account;
@@ -37,6 +36,7 @@ public class GameMaster : MonoBehaviour
     [SerializeField] private Player_Behavior CurrentPlayer;
     [SerializeField] private Player_Behavior NextPlayer;
     [SerializeField] private bool waiting;
+    [SerializeField] private GameObject Separator;
 
 
 
@@ -168,7 +168,7 @@ public class GameMaster : MonoBehaviour
                 }
                 return;
             }
-            else if(Player.GetPlayerState().isPlayersPassing())
+            else if(Player.GetPlayerState().isPlayersPassing() || Opponent.GetPlayerState().isPlayersPassing())
             {
                 DetermineNewStates();
             }
@@ -180,7 +180,7 @@ public class GameMaster : MonoBehaviour
         int player = playerCounter.GetCurrentPoints();
         int opponent = opponentCounter.GetCurrentPoints();
         RoundTokenPile pile;
-        string outcome = "";
+        string outcome;
         if (player > opponent)
         {
             outcome = "Player Won The Round!";
@@ -312,25 +312,27 @@ public class GameMaster : MonoBehaviour
     public void EnableBoard()
     {
         Player.EnablePass();
-        Opponent.EnablePass();
+        //Opponent.EnablePass();
         Player.EnableCrystals();
         Opponent.EnableCrystals();
         playerCounter.gameObject.SetActive(true);
         opponentCounter.gameObject.SetActive(true);
-        TurnButton.SetActive(true);
+        //TurnButton.SetActive(true);
         CurrentTurnToken.SetActive(true);
+        Separator.SetActive(true);
     }
 
     private void DisableBoard()
     {
         Player.DisablePass();
-        Opponent.DisablePass();
+        //Opponent.DisablePass();
         Player.DisableCrystals();
         Opponent.DisableCrystals();
         playerCounter.gameObject.SetActive(false);
         opponentCounter.gameObject.SetActive(false);
-        TurnButton.SetActive(false);
+        //TurnButton.SetActive(false);
         CurrentTurnToken.SetActive(false);
+        Separator.SetActive(false);
     }
 
     private void MainMenuReturn()
@@ -460,7 +462,7 @@ public class GameMaster : MonoBehaviour
                         ModifierCharacteristics.Anti_Capital(opponent);
                         break;
                     case Modifiers.CardModifiers.Quick_Deploy:
-                        ModifierCharacteristics.Quick_Deploy(card, player);
+                        ModifierCharacteristics.Quick_Deploy(player);
                         break;
                     case Modifiers.CardModifiers.CAP:
                         ModifierCharacteristics.CAP(card, player);

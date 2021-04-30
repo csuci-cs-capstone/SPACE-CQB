@@ -12,6 +12,11 @@ public class GameStateSingle : MonoBehaviour
 
     public void SetBattleState(int index)
     {
+        if(state == BattleState.PLAYERPASSING)
+        {
+            if (PassingNotice != null)
+                PassingNotice.Disable();
+        }
         this.state = (BattleState)index;
     }
 
@@ -29,12 +34,12 @@ public class GameStateSingle : MonoBehaviour
     {
         this.state = BattleState.PLAYERPASSING;
         button.Disable();
-        PassingNotice.Enable();
+        if (PassingNotice != null)
+            PassingNotice.Enable();
     }
 
     public void Reset_Button()
     {
         button.Reset();
-        PassingNotice.Disable();
     }
 }

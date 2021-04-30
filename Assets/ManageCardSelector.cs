@@ -72,6 +72,7 @@ public class ManageCardSelector : MonoBehaviour
                             }
                             card.transform.SetParent(Deck.gameObject.transform, false);
                             Deck.Reorganize();
+                            Collection.Reorganize();
                             Deck.UpdateList();
                             
                         }
@@ -90,6 +91,7 @@ public class ManageCardSelector : MonoBehaviour
                             }
                             card.transform.SetParent(Collection.gameObject.transform, false);
                             Deck.Reorganize();
+                            Collection.Reorganize();
                             Deck.UpdateList();
                         }
                     }
