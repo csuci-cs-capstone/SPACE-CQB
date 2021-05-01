@@ -33,7 +33,8 @@ public class GameStateSingle : MonoBehaviour
     public void SetPassing()
     {
         this.state = BattleState.PLAYERPASSING;
-        button.Disable();
+        if(button != null)
+            button.Disable();
         if (PassingNotice != null)
             PassingNotice.Enable();
     }

@@ -13,7 +13,7 @@ public class DrawCardsSingle : MonoBehaviour
     [SerializeField] private GameObject Opponentfield;
     [SerializeField] private Dropdown Dropdown;
     [SerializeField] private GameObject GameMaster;
-    private const int DEALTCARDAMOUNT = 5;
+    [SerializeField] private int DEALTCARDAMOUNT;
 
     public void OnClick()
     {

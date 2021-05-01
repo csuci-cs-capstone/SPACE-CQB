@@ -66,7 +66,8 @@ public class Player_Behavior : MonoBehaviour
 
     public void ResetPassing()
     {
-        Pass.GetComponent<PassingButton>().Reset();
+        if(Pass != null)
+            Pass.GetComponent<PassingButton>().Reset();
     }
 
     public SP_Deck GetDeck()

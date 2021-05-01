@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Login : MonoBehaviour
 {
+    public GameObject FirstScreen;
     public GameObject MainMenu;
     public GameObject LoginScreen;
     public GameObject Registration;
@@ -20,9 +21,9 @@ public class Login : MonoBehaviour
     {
         account = GameObject.Find("ActiveAccount").GetComponent<AccountCharacteristics>();
         DeactivateError();
-        if(account.GetPlayerName().CompareTo("") == 0)
+        if(account.GetPlayerName() == "")
         {
-            LogOut();
+            ActivateFirstScreen();
         }
         else
         {
@@ -129,6 +130,29 @@ public class Login : MonoBehaviour
     private void ActivateError()
     {
         ErrorPopup.SetActive(true);
+    }
+
+    private void ActivateFirstScreen()
+    {
+        FirstScreen.SetActive(true);
+
+        if (Registration.activeSelf)
+            Registration.SetActive(false);
+
+        if (LoginScreen.activeSelf)
+            LoginScreen.SetActive(false);
+
+        if (MainMenu.activeSelf)
+            MainMenu.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            FirstScreen.SetActive(false);
+            LogOut();
+        }
     }
 
 }

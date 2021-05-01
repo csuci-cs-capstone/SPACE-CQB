@@ -7,6 +7,9 @@ public class RoundToken : MonoBehaviour
     private bool done;
     public Sprite active;
     public Sprite disabled;
+    [SerializeField] private Color disableCol;
+    [SerializeField] private Image Icon;
+
 
     private void Start()
     {
@@ -17,6 +20,7 @@ public class RoundToken : MonoBehaviour
     public void SetDone()
     {
         gameObject.GetComponent<Image>().sprite = disabled;
+        Icon.color = disableCol;
         done = true;
     }
 

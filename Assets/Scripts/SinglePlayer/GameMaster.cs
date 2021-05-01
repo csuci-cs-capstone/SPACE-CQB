@@ -21,7 +21,6 @@ public class GameMaster : MonoBehaviour
     [SerializeField] private AccountCharacteristics Account;
     [SerializeField] private OpponentCollection opponentCollection;
     [SerializeField] private GameObject CurrentTurnToken;
-    [SerializeField] private GameObject TurnButton;
     [SerializeField] public bool cardsDelt = false;
     [SerializeField] private int player_cards;
     [SerializeField] private int Num_to_Win = 2;
@@ -123,6 +122,11 @@ public class GameMaster : MonoBehaviour
     {
         if (cardsDelt)
         {
+
+            /*CurrentPlayer.GetPlayField().gameObject.GetComponent<SP_CardPile_Display>().UpdateDisplay();
+            NextPlayer.GetPlayField().gameObject.GetComponent<SP_CardPile_Display>().UpdateDisplay();*/
+            CurrentPlayer.GetPlayField().gameObject.GetComponent<SP_CardPile_Display>().RefreshLayoutGroupsImmediateAndRecursive(CurrentPlayer.GetPlayField().gameObject);
+            NextPlayer.GetPlayField().gameObject.GetComponent<SP_CardPile_Display>().RefreshLayoutGroupsImmediateAndRecursive(NextPlayer.GetPlayField().gameObject);
             if (!enemyBehavior.IsMakingMove() && opponent.isPlayersTurn())
             {
                 if (Opponent.GetHand().GetNumberOfCards() > 0)
@@ -167,6 +171,10 @@ public class GameMaster : MonoBehaviour
                     }
                 }
                 return;
+            }
+            else if(Player.GetHand().GetNumberOfCards() == 0)
+            {
+                Player.GetPlayerState().SetPassing();
             }
             else if(Player.GetPlayerState().isPlayersPassing() || Opponent.GetPlayerState().isPlayersPassing())
             {
@@ -493,7 +501,11 @@ public class GameMaster : MonoBehaviour
             ApplyCardModifiers(playedCard, CurrentPlayer, NextPlayer);
             playedCard = null;
         }
+        //CurrentPlayer.GetPlayField().gameObject.GetComponent<SP_CardPile_Display>().UpdateDisplay();
+        CurrentPlayer.GetPlayField().gameObject.GetComponent<SP_CardPile_Display>().RefreshLayoutGroupsImmediateAndRecursive(CurrentPlayer.GetPlayField().gameObject);
         DetermineNewStates();
+        //NextPlayer.GetPlayField().gameObject.GetComponent<SP_CardPile_Display>().UpdateDisplay();
+        NextPlayer.GetPlayField().gameObject.GetComponent<SP_CardPile_Display>().RefreshLayoutGroupsImmediateAndRecursive(CurrentPlayer.GetPlayField().gameObject);
         playerCounter.Counter();
         opponentCounter.Counter();
     }
